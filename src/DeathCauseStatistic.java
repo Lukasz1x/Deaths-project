@@ -34,4 +34,32 @@ public class DeathCauseStatistic
                 .toArray();
         return new DeathCauseStatistic(ICD, deaths);
     }
+
+    public class AgeBracketDeaths
+    {
+        public final int young;
+        public final int old;
+        public final int deathCount;
+
+        public AgeBracketDeaths(int young, int old, int deathCount) {
+            this.young = young;
+            this.old = old;
+            this.deathCount = deathCount;
+        }
+
+        @Override
+        public String toString() {
+            return "AgeBracketDeaths{" +
+                    "young=" + young +
+                    ", old=" + old +
+                    ", deathCount=" + deathCount +
+                    '}';
+        }
+    }
+
+    public AgeBracketDeaths getDeathsForAge(int age)
+    {
+        int index = age>=100 ? deaths.length-1 : age/5;
+        return new AgeBracketDeaths(index*5, index*5 == deaths.length-1 ? null : index*5+4, deaths[index]);
+    }
 }
